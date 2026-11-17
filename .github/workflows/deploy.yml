@@ -1,0 +1,92 @@
+# Builds and publishes the site to GitHub Pages on every push to main.
+#
+# Three things happen here:
+#   1. Only the files the site needs are published — the README, the tools
+#      folder and the git history stay out of the deployed tree.
+#   2. Every PDF has its hidden metadata stripped. Word, Pages and LaTeX
+#      record your account name, the software, sometimes the original file
+#      path on your Mac. Only the Title and Subject are kept, because the
+#      site shows those anyway. The build fails if an author field survives.
+#   3. essays/manifest.json is regenerated, so adding an essay is just a
+#      matter of dropping the PDF in the folder and pushing.
+name: Deploy essays
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:      # lets you re-run it by hand from the Actions tab
+
+# Least privilege: read the repo and publish Pages, nothing else.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install PDF tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libimage-exiftool-perl qpdf poppler-utils
+
+      - name: Assemble the published site
+        run: |
+          set -euo pipefail
+          mkdir -p _site/essays
+          # An explicit allow-list. Anything not named here is never published.
+          cp index.html style.css fonts.css config.js app.js favicon.svg grain.svg _site/
+          [ -f _headers ] && cp _headers _site/ || true
+          [ -d fonts ] && cp -r fonts _site/ || true
+          find essays -maxdepth 1 -type f -iname '*.pdf' ! -name '._*' -exec cp {} _site/essays/ \;
+
+      - name: Strip hidden metadata from every PDF
+        run: |
+          set -euo pipefail
+          shopt -s nullglob nocaseglob
+          for f in _site/essays/*.pdf; do
+            # Remove every tag, then put back only Title and Subject.
+            exiftool -q -q -all:all= -tagsfromfile @ -Title -Subject -overwrite_original "$f"
+            # exiftool edits PDFs by appending, so the old values are still in
+            # the file. Rewriting it with qpdf drops them for good.
+            qpdf --linearize --replace-input "$f"
+          done
+          echo "PDF metadata stripped (title and subject kept)."
+
+      - name: Verify nothing identifying survived
+        run: |
+          set -euo pipefail
+          shopt -s nullglob nocaseglob
+          bad=0
+          for f in _site/essays/*.pdf; do
+            left=$(exiftool -q -q -s3 -Author -Creator -XMP-dc:Creator -XMP-pdf:Producer "$f" | tr -d '[:space:]')
+            if [ -n "$left" ]; then echo "::error::$f still carries author/creator metadata"; bad=1; fi
+          done
+          [ "$bad" = 0 ] && echo "No author or creator fields in any published PDF."
+          exit $bad
+
+      - name: Generate essays/manifest.json
+        run: python3 tools/build-manifest.py _site/essays
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
