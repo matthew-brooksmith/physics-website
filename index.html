@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matt Brooks — Physics essays</title>
+<meta name="description" content="Essays in physics, as PDFs">
+<meta name="theme-color" content="#faf6f0">
+
+<!-- ════════════════════ CONTENT SECURITY POLICY ════════════════════
+     Same policy as the photography site: everything is 'self', so the page
+     cannot load or contact anything outside its own origin. No CDNs, no
+     analytics, no third-party fonts, no inline script or style.
+
+     The Patreon and Buy Me a Coffee buttons are ordinary links. Following a
+     link is not something CSP restricts, so they need no exceptions here —
+     and because they're plain links rather than those services' embed
+     widgets, neither company can see who visits this page.
+
+     `frame-ancestors` is set in `_headers`; browsers ignore it in a meta tag. -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'none';
+  script-src 'self';
+  style-src 'self';
+  img-src 'self';
+  font-src 'self';
+  connect-src 'self';
+  form-action 'none';
+  base-uri 'none';
+  object-src 'none';
+  frame-src 'none';
+  media-src 'none';
+  worker-src 'none';
+  manifest-src 'none';
+  upgrade-insecure-requests;">
+
+<meta name="referrer" content="no-referrer">
+
+<meta property="og:title" content="Matt Brooks — Physics essays">
+<meta property="og:description" content="Essays in physics, as PDFs">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="config.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+
+<body>
+<div class="grain" id="grain"></div>
+
+<header class="header">
+  <a class="wordmark" id="wordmark" href="#top"></a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#essays">Essays</a>
+    <span class="sep" aria-hidden="true">/</span>
+    <a href="#about">About</a>
+    <span class="sep support-only" aria-hidden="true">/</span>
+    <a href="#support" class="support-only">Support</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1 id="heading"></h1>
+    <p class="intro" id="intro"></p>
+  </section>
+
+  <section class="essays" id="essays" aria-labelledby="essaysLabel">
+    <div class="section-label" id="essaysLabel">
+      <span>Essays</span><span class="count" id="count"></span>
+    </div>
+    <ol class="list" id="list"></ol>
+    <!-- Filled in by app.js only when no essays are found. -->
+    <div class="empty" id="empty"></div>
+  </section>
+
+  <section class="panel" id="about" aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle"></h2>
+    <div class="prose" id="aboutBody"></div>
+    <div class="links" id="aboutLinks"></div>
+  </section>
+
+  <section class="panel support" id="support" aria-labelledby="supportTitle">
+    <h2 id="supportTitle"></h2>
+    <p class="prose" id="supportText"></p>
+    <div class="buttons" id="supportButtons"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span id="footerName"></span>
+  <span id="year"></span>
+</footer>
+
+<noscript>
+  <p class="noscript-msg">This page needs JavaScript to list the essays.</p>
+</noscript>
+</body>
+</html>
