@@ -176,7 +176,7 @@
 
     var s = CONFIG.support || {};
     var buttons = [
-      { href: safeHref(s.substack), label: "Subscribe", sub: "Substack", cls: "btn btn-primary" },
+      { href: safeHref(s.substack), label: "Subscribe", sub: "substack", subCls: "btn-sub tt", cls: "btn btn-primary" },
       { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", sub: "One-off", cls: "btn" }
     ].filter(function (b) { return b.href; });
 
@@ -185,14 +185,18 @@
       return;
     }
     $("supportTitle").textContent = s.heading || "Support";
-    $("supportText").textContent = s.text || "";
+    // Every "Substack" in the text is set like LaTeX's \texttt{substack}.
+    String(s.text || "").split(/(substack)/i).forEach(function (part, i) {
+      $("supportText").appendChild(i % 2 ? el("span", "tt", part.toLowerCase())
+                                         : document.createTextNode(part));
+    });
     buttons.forEach(function (b) {
       var a = el("a", b.cls);
       a.href = b.href;
       a.target = "_blank";
       a.rel = "noopener";
       a.appendChild(el("span", "btn-label", b.label));
-      a.appendChild(el("span", "btn-sub", b.sub));
+      a.appendChild(el("span", b.subCls || "btn-sub", b.sub));
       $("supportButtons").appendChild(a);
     });
   }
