@@ -188,7 +188,7 @@
 
     var s = CONFIG.support || {};
     var buttons = [
-      { href: safeHref(s.patreon), label: "Become a patron", sub: "Patreon", cls: "btn btn-primary" },
+      { href: safeHref(s.substack), label: "Subscribe", sub: "Substack", cls: "btn btn-primary" },
       { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", sub: "One-off", cls: "btn" }
     ].filter(function (b) { return b.href; });
 

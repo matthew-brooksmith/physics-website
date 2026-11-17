@@ -18,7 +18,7 @@
    type can turn into code on the page.
    ══════════════════════════════════════════════════════════════════════ */
 const CONFIG = {
-  title:   "Matt Brooks",          // wordmark, top-left. "" to hide.
+  title:   "Matthew Brooksmith",   // wordmark, top-left. "" to hide.
   heading: "Essays in physics",    // the big line above the list
   intro:   "Notes and longer pieces written while learning physics. Each one is a PDF; click a title to read it.",
   folder:  "essays/",              // where your PDFs live
@@ -45,8 +45,8 @@ const CONFIG = {
   // and the whole "Support" section disappears.
   support: {
     heading: "Support the writing",
-    text:    "If an essay helped you, you can keep the next one coming.",
-    patreon:     "",   // e.g. "https://www.patreon.com/yourname"
+    text:    "Get new essays by email on Substack, or buy me a coffee if one helped you.",
+    substack:     "",  // e.g. "https://yourname.substack.com"
     buymeacoffee: "",  // e.g. "https://buymeacoffee.com/yourname"
   },
 
