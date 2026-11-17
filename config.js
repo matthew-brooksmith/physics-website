@@ -20,7 +20,7 @@
 const CONFIG = {
   title:   "Matthew Brooksmith",   // wordmark, top-left. "" to hide.
   heading: "Essays in physics",    // the big line above the list
-  intro:   "Notes and longer pieces written while learning physics. Each one is a PDF; click a title to read it.",
+  intro:   "Topics include the foundations of physics and the philosophy of physics. I write to consolidate and grow my own ideas and improve my understanding of the subject.",
   folder:  "essays/",              // where your PDFs live
   order:   "desc",                 // "desc" = newest first, "asc" = oldest first
   grain:   true,                   // faint paper texture over the background

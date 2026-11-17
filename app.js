@@ -177,7 +177,7 @@
     var s = CONFIG.support || {};
     var buttons = [
       { href: safeHref(s.substack), label: "Subscribe", sub: "substack", subCls: "btn-sub tt", cls: "btn btn-primary" },
-      { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", sub: "One-off", cls: "btn" }
+      { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", sub: "buy-me-a-coffee", subCls: "btn-sub tt", cls: "btn" }
     ].filter(function (b) { return b.href; });
 
     if (!buttons.length) {
@@ -185,9 +185,10 @@
       return;
     }
     $("supportTitle").textContent = s.heading || "Support";
-    // Every "Substack" in the text is set like LaTeX's \texttt{substack}.
-    String(s.text || "").split(/(substack)/i).forEach(function (part, i) {
-      $("supportText").appendChild(i % 2 ? el("span", "tt", part.toLowerCase())
+    // "Substack" and "buy me a coffee" in the text are set like LaTeX's
+    // \texttt{substack} and \texttt{buy-me-a-coffee}.
+    String(s.text || "").split(/(substack|buy[\s-]+me[\s-]+a[\s-]+coffee)/i).forEach(function (part, i) {
+      $("supportText").appendChild(i % 2 ? el("span", "tt", part.toLowerCase().replace(/\s+/g, "-"))
                                          : document.createTextNode(part));
     });
     buttons.forEach(function (b) {
