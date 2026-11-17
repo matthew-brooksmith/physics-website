@@ -174,22 +174,10 @@
     $("intro").textContent = CONFIG.intro || "";
     if (!CONFIG.grain) $("grain").remove();
 
-    var about = CONFIG.about || {};
-    $("aboutTitle").textContent = about.heading || "About";
-    (about.body || []).forEach(function (t) { $("aboutBody").appendChild(el("p", null, t)); });
-    (about.links || []).forEach(function (l) {
-      var h = l && safeHref(l.href);
-      if (!h) return;
-      var a = el("a", null, l.label || h);
-      a.href = h;
-      if (!/^mailto:/i.test(h)) { a.target = "_blank"; a.rel = "noopener"; }
-      $("aboutLinks").appendChild(a);
-    });
-
     var s = CONFIG.support || {};
     var buttons = [
-      { href: safeHref(s.patreon), label: "Become a patron", sub: "Patreon", cls: "btn btn-primary" },
-      { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", sub: "One-off", cls: "btn" }
+      { href: safeHref(s.substack), label: "Substack", cls: "btn btn-primary" },
+      { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", cls: "btn" }
     ].filter(function (b) { return b.href; });
 
     if (!buttons.length) {
@@ -197,14 +185,21 @@
       return;
     }
     $("supportTitle").textContent = s.heading || "Support";
-    $("supportText").textContent = s.text || "";
+    // In the text, "Substack" is set like LaTeX's \texttt{substack}, and
+    // "buy me a coffee" like \textit{``buy me a coffee''}.
+    String(s.text || "").split(/(substack|buy\s+me\s+a\s+coffee)/i).forEach(function (part, i) {
+      var node = !(i % 2) ? document.createTextNode(part)
+               : /substack/i.test(part) ? el("span", "tt", part.toLowerCase())
+               : el("em", "it", "\u201c" + part.toLowerCase() + "\u201d");
+      $("supportText").appendChild(node);
+    });
     buttons.forEach(function (b) {
       var a = el("a", b.cls);
       a.href = b.href;
       a.target = "_blank";
       a.rel = "noopener";
       a.appendChild(el("span", "btn-label", b.label));
-      a.appendChild(el("span", "btn-sub", b.sub));
+      if (b.sub) a.appendChild(el("span", b.subCls || "btn-sub", b.sub));
       $("supportButtons").appendChild(a);
     });
   }

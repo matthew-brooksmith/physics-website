@@ -73,45 +73,45 @@ page counts. The live site has both.
 A custom domain works exactly as in the photography site's README §4.
 Netlify and Cloudflare Pages are free alternatives that also read `_headers`.
 
-## 4. Setting up Patreon and Buy Me a Coffee
+## 4. Setting up Substack and Buy Me a Coffee
 
 The page shows a **Support** section with one button per service. A button
 only appears once its address is filled in, so you can set up one, both, or
 neither.
 
-**Buy Me a Coffee** (one-off tips, quickest to set up):
+**Buy Me a Coffee** (one-off tips):
 
 1. Go to **buymeacoffee.com** → **Start my page**. Sign up with email or Google.
 2. Pick your page name. This becomes the address, e.g.
-   `buymeacoffee.com/mattbrooks`.
+   `buymeacoffee.com/matthewbrooksmith`.
 3. Add a short bio and a photo; you can skip memberships and shop.
 4. **Settings → Payouts**: connect Stripe (or PayPal where offered) so money
    can reach your bank. Stripe asks for ID and bank details.
 5. Copy your page address.
 
-**Patreon** (monthly supporters):
+**Substack** (readers subscribe by email; paid subscriptions optional):
 
-1. Go to **patreon.com** → **Create on Patreon**. Sign up.
-2. Choose a page name and category (Writing or Education).
-3. Set up at least one tier, e.g. *£3/month: early access to essays*. A
-   free tier is fine to start.
-4. **Settings → Payouts**: add your bank or PayPal and complete tax info
-   (a short W-8BEN form if you're outside the US).
-5. **Publish** the page, then copy its address, e.g.
-   `https://www.patreon.com/mattbrooks`.
+1. Go to **substack.com** → **Start writing**. Sign up.
+2. Name the publication and pick its address, e.g.
+   `matthewbrooksmith.substack.com`.
+3. Write a one-line description. A short first post announcing the essays
+   site is a good start.
+4. Optional: **Settings → Payments** turns on paid subscriptions through
+   Stripe. Free subscribers need no setup.
+5. Copy the publication address.
 
 Then in `config.js`:
 
 ```js
 support: {
   ...
-  patreon:      "https://www.patreon.com/mattbrooks",
-  buymeacoffee: "https://buymeacoffee.com/mattbrooks",
+  substack:     "https://matthewbrooksmith.substack.com",
+  buymeacoffee: "https://buymeacoffee.com/matthewbrooksmith",
 },
 ```
 
-Commit, push, done. If you're under 18, both services need a parent or
-guardian to own the payout account.
+Commit, push, done. If you're under 18, payouts on either service need a
+parent or guardian to own the Stripe account.
 
 The buttons are plain links, not the services' embed widgets, so neither
 company can see who visits your site.
@@ -132,5 +132,7 @@ File → Properties) before committing.
 ## 6. Fonts
 
 Anton (headings, as on the photography site) and Newsreader (reading text)
-are served from this site, not Google. To change them, edit `FAMILIES` in
+are served from this site, not Google. The word "substack" is set in
+Latin Modern Mono (`fonts/lmmono10-regular.woff2`), the open version of
+LaTeX's `\texttt` font, declared at the top of `style.css`. To change them, edit `FAMILIES` in
 `tools/fetch-fonts.py`, run it, and commit `fonts.css` and `fonts/`.

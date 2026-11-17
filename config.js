@@ -18,36 +18,22 @@
    type can turn into code on the page.
    ══════════════════════════════════════════════════════════════════════ */
 const CONFIG = {
-  title:   "Matt Brooks",          // wordmark, top-left. "" to hide.
+  title:   "Matthew Brooksmith",   // wordmark, top-left. "" to hide.
   heading: "Essays in physics",    // the big line above the list
-  intro:   "Notes and longer pieces written while learning physics. Each one is a PDF; click a title to read it.",
+  intro:   "Topics include the foundations of physics and the philosophy of physics. I write to consolidate and grow my own ideas and improve my understanding of the subject.",
   folder:  "essays/",              // where your PDFs live
   order:   "desc",                 // "desc" = newest first, "asc" = oldest first
   grain:   true,                   // faint paper texture over the background
 
-  about: {
-    heading: "About",
-    // One paragraph per string. Rewrite these in your own words.
-    body: [
-      "I am a student writing about the physics I am learning, one essay at a time.",
-      "This site is a plain archive: no social media, no tracking, just the essays."
-    ],
-    // Only http(s) and mailto links are accepted; anything else is dropped.
-    links: [
-      // e.g. { label: "Email", href: "mailto:you@example.com" },
-      // { label: "Photography", href: "https://matthew-brooksmith.github.io/photography-website/" },
-    ]
-  },
-
   // ── Support buttons ─────────────────────────────────────────────────
-  // Paste your page addresses here once the accounts exist (see README §4).
+  // Your page addresses (see README §4 for how they were set up).
   // Leave one as "" and its button simply doesn't appear; leave both empty
   // and the whole "Support" section disappears.
   support: {
     heading: "Support the writing",
-    text:    "If an essay helped you, you can keep the next one coming.",
-    patreon:     "",   // e.g. "https://www.patreon.com/yourname"
-    buymeacoffee: "",  // e.g. "https://buymeacoffee.com/yourname"
+    text:    "If you found one of the essays to be insightful or useful, you can subscribe on Substack or buy me a coffee",
+    substack:     "https://substack.com/@matthewbrooksmith",
+    buymeacoffee: "https://buymeacoffee.com/matthewbrooksmith",
   },
 
   meta: {   // optional per-file overrides, keyed by EXACT filename
