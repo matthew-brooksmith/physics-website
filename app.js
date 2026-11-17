@@ -176,8 +176,8 @@
 
     var s = CONFIG.support || {};
     var buttons = [
-      { href: safeHref(s.substack), label: "Subscribe", sub: "substack", subCls: "btn-sub tt", cls: "btn btn-primary" },
-      { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", sub: "“buy me a coffee”", subCls: "btn-sub it", cls: "btn" }
+      { href: safeHref(s.substack), label: "Substack", cls: "btn btn-primary" },
+      { href: safeHref(s.buymeacoffee), label: "Buy me a coffee", cls: "btn" }
     ].filter(function (b) { return b.href; });
 
     if (!buttons.length) {
@@ -199,7 +199,7 @@
       a.target = "_blank";
       a.rel = "noopener";
       a.appendChild(el("span", "btn-label", b.label));
-      a.appendChild(el("span", b.subCls || "btn-sub", b.sub));
+      if (b.sub) a.appendChild(el("span", b.subCls || "btn-sub", b.sub));
       $("supportButtons").appendChild(a);
     });
   }

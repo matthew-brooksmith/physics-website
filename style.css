@@ -185,9 +185,7 @@ body.is-empty .list{ display:none; }
 
 /* \texttt{substack} and \textit{``buy me a coffee''} */
 .tt{ font-family:var(--tt); font-size:1.02em; letter-spacing:0; text-transform:none; }
-.btn-sub.tt{ font-size:.92rem; opacity:.75; }
 .it{ font-family:var(--serif); font-style:italic; letter-spacing:0; text-transform:none; }
-.btn-sub.it{ font-size:.98rem; opacity:.75; }
 
 /* ══════════════ FOOTER ══════════════ */
 .footer{

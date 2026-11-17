@@ -31,7 +31,7 @@ const CONFIG = {
   // and the whole "Support" section disappears.
   support: {
     heading: "Support the writing",
-    text:    "If you found one of the essays to be insightful or useful, you can subscribe on Substack or buy me a coffee.",
+    text:    "If you found one of the essays to be insightful or useful, you can subscribe on Substack or buy me a coffee",
     substack:     "https://substack.com/@matthewbrooksmith",
     buymeacoffee: "https://buymeacoffee.com/matthewbrooksmith",
   },
