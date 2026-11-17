@@ -174,18 +174,6 @@
     $("intro").textContent = CONFIG.intro || "";
     if (!CONFIG.grain) $("grain").remove();
 
-    var about = CONFIG.about || {};
-    $("aboutTitle").textContent = about.heading || "About";
-    (about.body || []).forEach(function (t) { $("aboutBody").appendChild(el("p", null, t)); });
-    (about.links || []).forEach(function (l) {
-      var h = l && safeHref(l.href);
-      if (!h) return;
-      var a = el("a", null, l.label || h);
-      a.href = h;
-      if (!/^mailto:/i.test(h)) { a.target = "_blank"; a.rel = "noopener"; }
-      $("aboutLinks").appendChild(a);
-    });
-
     var s = CONFIG.support || {};
     var buttons = [
       { href: safeHref(s.substack), label: "Subscribe", sub: "Substack", cls: "btn btn-primary" },

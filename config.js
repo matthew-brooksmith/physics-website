@@ -25,29 +25,15 @@ const CONFIG = {
   order:   "desc",                 // "desc" = newest first, "asc" = oldest first
   grain:   true,                   // faint paper texture over the background
 
-  about: {
-    heading: "About",
-    // One paragraph per string. Rewrite these in your own words.
-    body: [
-      "I am a student writing about the physics I am learning, one essay at a time.",
-      "This site is a plain archive: no social media, no tracking, just the essays."
-    ],
-    // Only http(s) and mailto links are accepted; anything else is dropped.
-    links: [
-      // e.g. { label: "Email", href: "mailto:you@example.com" },
-      // { label: "Photography", href: "https://matthew-brooksmith.github.io/photography-website/" },
-    ]
-  },
-
   // ── Support buttons ─────────────────────────────────────────────────
-  // Paste your page addresses here once the accounts exist (see README §4).
+  // Your page addresses (see README §4 for how they were set up).
   // Leave one as "" and its button simply doesn't appear; leave both empty
   // and the whole "Support" section disappears.
   support: {
     heading: "Support the writing",
-    text:    "Get new essays by email on Substack, or buy me a coffee if one helped you.",
-    substack:     "",  // e.g. "https://yourname.substack.com"
-    buymeacoffee: "",  // e.g. "https://buymeacoffee.com/yourname"
+    text:    "If you found one of the essays to be insightful or useful, you can subscribe on Substack or buy me a coffee.",
+    substack:     "https://substack.com/@matthewbrooksmith",
+    buymeacoffee: "https://buymeacoffee.com/matthewbrooksmith",
   },
 
   meta: {   // optional per-file overrides, keyed by EXACT filename
