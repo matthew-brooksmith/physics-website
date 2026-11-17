@@ -46,6 +46,12 @@ jobs:
           [ -f _headers ] && cp _headers _site/ || true
           [ -d fonts ] && cp -r fonts _site/ || true
           find essays -maxdepth 1 -type f -iname '*.pdf' ! -name '._*' -exec cp {} _site/essays/ \;
+          # Browsers keep CSS and JS for a while, so after a change a visitor
+          # could see new HTML with old styles. Tagging each file with this
+          # commit makes every deploy fetch fresh copies.
+          v="${GITHUB_SHA::8}"
+          sed -i -E "s#(href|src)=\"(fonts\.css|style\.css|config\.js|app\.js)\"#\1=\"\2?v=$v\"#g" _site/index.html
+          grep -q "style.css?v=$v" _site/index.html
 
       - name: Strip hidden metadata from every PDF
         run: |
