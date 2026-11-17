@@ -132,7 +132,7 @@ File → Properties) before committing.
 ## 6. Fonts
 
 Anton (headings, as on the photography site) and Newsreader (reading text)
-are served from this site, not Google. The words "substack" and "buy-me-a-coffee" are set in
+are served from this site, not Google. The word "substack" is set in
 Latin Modern Mono (`fonts/lmmono10-regular.woff2`), the open version of
 LaTeX's `\texttt` font, declared at the top of `style.css`. To change them, edit `FAMILIES` in
 `tools/fetch-fonts.py`, run it, and commit `fonts.css` and `fonts/`.
